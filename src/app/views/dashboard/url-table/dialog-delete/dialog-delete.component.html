@@ -1,0 +1,10 @@
+<h1 mat-dialog-title>Delete short url</h1>
+<div mat-dialog-content>
+  Are you sure you want to delete and thus disable this short url?
+</div>
+<div mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close>Cancel</button>
+  <button mat-button mat-dialog-close cdkFocusInitial [mat-dialog-close]="true">
+    Delete
+  </button>
+</div>
