@@ -1,0 +1,23 @@
+<div class="header">
+  <div class="left"></div>
+  <h2>Url Shortener</h2>
+  <div class="right">
+    <button mat-mini-fab matTooltip="Your Profile" [matMenuTriggerFor]="menu">
+      <mat-icon>account_circle</mat-icon>
+    </button>
+    <mat-menu #menu="matMenu">
+      <span
+        mat-menu-item
+        class="username"
+        disableRipple="true"
+        disabled
+        style="opacity: 1"
+        >{{ username ? username : "User" }}</span
+      >
+      <button mat-menu-item (click)="logOut()">
+        <mat-icon>logout</mat-icon>
+        <span>Log out</span>
+      </button>
+    </mat-menu>
+  </div>
+</div>
