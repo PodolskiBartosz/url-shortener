@@ -1,0 +1,9 @@
+<div class="dashboard-page">
+  <app-header></app-header>
+  <app-url-generator (urlChange)="urlChange($event)"></app-url-generator>
+  <div class="main-container">
+    <div class="left"></div>
+    <app-url-table [url]="newUrlItem" class="center"></app-url-table>
+    <div class="right"></div>
+  </div>
+</div>
