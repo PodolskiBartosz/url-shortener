@@ -1,8 +1,12 @@
 import { UrlItem } from '../../shared/models/url-item';
 import { USER_A, USER_ADMIN } from './mock-users';
 import { SessionManager } from '../../core/services/session-manager/session-manager.service';
+import { Injectable } from '@angular/core';
 const PREFIX_URL = 'url';
 
+@Injectable({
+  providedIn: 'root',
+})
 export class MockLocalStorageManager {
   constructor(private _sessionManager: SessionManager) {}
 

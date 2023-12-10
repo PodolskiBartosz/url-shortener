@@ -19,8 +19,6 @@ export class SessionManager {
   public createAccessSession(info: LoginInfo) {
     this.setNewAccessSessionExpiration();
     localStorage.setItem(SESSION_TOKEN_STORAGE_KEY, info.token);
-    console.log('Session Manager function');
-    console.log(this);
     localStorage.setItem(USER_ID_STORAGE_KEY, getIdByUsername(info.username));
   }
 
