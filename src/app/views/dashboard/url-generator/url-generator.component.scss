@@ -1,0 +1,44 @@
+.url-input {
+  display: flex;
+  justify-content: center;
+  margin-top: 3rem;
+  gap: 1rem;
+
+  mat-form-field {
+    font-size: 1.25rem;
+    width: 40%;
+  }
+
+  button {
+    padding: 1.75rem;
+    font-size: 1.25rem;
+  }
+}
+
+.created-url-container {
+  display: flex;
+  height: 4rem;
+  justify-content: center;
+
+  .card {
+    width: fit-content;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #202020;
+    border-radius: 1rem;
+    font-size: 1.25rem;
+
+    .text {
+      margin-left: 2rem;
+    }
+
+    .end {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-left: 3rem;
+    }
+  }
+}

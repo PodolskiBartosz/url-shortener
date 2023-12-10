@@ -1,0 +1,37 @@
+<div class="url-input">
+  <mat-form-field>
+    <mat-label>URL</mat-label>
+    <input
+      type="url"
+      matInput
+      placeholder="https://www.google.com"
+      [formControl]="urlFormControl"
+    />
+    <mat-error>The url is invalid.</mat-error>
+  </mat-form-field>
+  <button color="primary" mat-raised-button (click)="onCreate()">
+    Shorten Url
+  </button>
+</div>
+
+<div
+  [style.visibility]="createdUrl ? 'visible' : 'hidden'"
+  class="created-url-container"
+>
+  <div class="card">
+    <span class="text">
+      Successfully created <a matTooltip="{{ createdUrl?.fullUrl }}">URL: </a>
+      <a href="{{ createdUrl?.shortUrl }}" target="_blank" class="short-url"
+        >http://localhost{{ createdUrl?.shortUrl }}</a
+      >
+    </span>
+    <div class="end">
+      <button mat-flat-button color="accent" (click)="onCopyLink()">
+        Copy
+      </button>
+      <button mat-icon-button (click)="onClose()">
+        <mat-icon>close</mat-icon>
+      </button>
+    </div>
+  </div>
+</div>

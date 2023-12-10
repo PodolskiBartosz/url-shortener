@@ -1,0 +1,25 @@
+.url-table {
+  display: flex;
+  width: 100%;
+
+  table {
+    height: 30%;
+
+    .short-url,
+    .full-url,
+    .id {
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .id {
+      max-width: 5rem;
+    }
+
+    .short-url,
+    .full-url {
+      max-width: 15rem;
+    }
+  }
+}
