@@ -4,7 +4,7 @@ import { LoginInfo } from '../../../shared/models/login-info';
 import {
   getIdByUsername,
   getUsernameById,
-} from '../../../mocks/database/users';
+} from '../../../mocks/database/mock-users';
 import { Injectable } from '@angular/core';
 
 const EXPIRATION_STORAGE_KEY = 'token_expire_at';
