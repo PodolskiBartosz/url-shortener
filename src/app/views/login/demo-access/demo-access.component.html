@@ -1,0 +1,25 @@
+<h2>Demo Access</h2>
+<div class="users">
+  <div *ngFor="let user of displayUsers">
+    <h3>{{ user.description }}</h3>
+    <span>
+      Username: {{ user.username }}
+      <button mat-icon-button (click)="onCopy(user.username)">
+        <mat-icon>content_copy</mat-icon>
+      </button>
+    </span>
+    <span>
+      Password: {{ user.password }}
+      <button mat-icon-button (click)="onCopy(user.password)">
+        <mat-icon>content_copy</mat-icon>
+      </button>
+    </span>
+    <button
+      mat-flat-button
+      color="accent"
+      (click)="onLogIn(user.username, user.password)"
+    >
+      Instant Log In
+    </button>
+  </div>
+</div>
