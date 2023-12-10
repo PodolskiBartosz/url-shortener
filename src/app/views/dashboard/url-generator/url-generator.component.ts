@@ -81,10 +81,7 @@ export class UrlGeneratorComponent {
     this.createdUrl = undefined;
   }
 
-  private handleCreateUrlResponse(
-    resp: HttpResponse<void>,
-    urlItem: UrlItem,
-  ) {
+  private handleCreateUrlResponse(resp: HttpResponse<void>, urlItem: UrlItem) {
     if (resp.ok) {
       this.createdUrl = urlItem;
       this.urlChange.emit(urlItem);

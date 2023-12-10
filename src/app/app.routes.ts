@@ -1,6 +1,6 @@
 import { Routes } from '@angular/router';
 import { LoginComponent } from './views/login/login.component';
-import { ShortLinkComponent } from './views/short-link/short-link.component';
+import { LinkRedirectionComponent } from './views/link-redirection/link-redirection.component';
 import { authenticationGuard } from './core/guards/authentication-guard';
 import { loginAccessGuard } from './core/guards/login-access-guard';
 export const routes: Routes = [
@@ -13,7 +13,7 @@ export const routes: Routes = [
       ),
     canActivate: [authenticationGuard],
   },
-  { path: 'sl/:id', component: ShortLinkComponent },
+  { path: 'sl/:id', component: LinkRedirectionComponent },
   { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
   { path: '**', redirectTo: 'dashboard' },
 ];
