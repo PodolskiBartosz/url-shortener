@@ -1,0 +1,31 @@
+<div class="login-page">
+  <section>
+    <h1>Url Shortener</h1>
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+      <mat-form-field>
+        <mat-label>Username</mat-label>
+        <input matInput [formControl]="usernameControl" />
+        <mat-error>Please fill out this field.</mat-error>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Password</mat-label>
+        <input
+          matInput
+          type="password"
+          [type]="hidePassword ? 'password' : 'text'"
+          [formControl]="passwordControl"
+        />
+        <button mat-icon-button matSuffix (click)="togglePassword()">
+          <mat-icon>{{
+            hidePassword ? "visibility_off" : "visibility"
+          }}</mat-icon>
+        </button>
+        <mat-error>Please fill out this field.</mat-error>
+      </mat-form-field>
+      <button mat-raised-button color="primary" type="submit">Log In</button>
+    </form>
+  </section>
+  <section>
+    <app-demo-access></app-demo-access>
+  </section>
+</div>
