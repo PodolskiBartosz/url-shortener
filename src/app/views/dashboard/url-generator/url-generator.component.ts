@@ -108,7 +108,7 @@ export class UrlGeneratorComponent {
     }
   }
 
-  // Generates 4 random alphabetical characters
+  // Generates 4 random alphanumerical characters
   private generateShortLinkPath() {
     return Math.random().toString(36).slice(2, 6);
   }
