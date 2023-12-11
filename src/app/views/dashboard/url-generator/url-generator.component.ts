@@ -1,4 +1,9 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Output,
+  SecurityContext,
+} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
@@ -13,6 +18,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { InfoDialogService } from '../../../core/components/info-dialog/info-dialog.service';
 import { UNAUTHORIZED_DIALOG_DATA } from '../../../core/components/info-dialog/info-dialog-data';
 import { Router } from '@angular/router';
+import { DomSanitizer } from '@angular/platform-browser';
 
 const URL_REGEX = new RegExp(
   '(http|ftp|https):\\/\\/([\\w_-]+(?:(?:\\.[\\w_-]+)+))([\\w.,@?^=%&:\\/~+#-]*[\\w@?^=%&\\/~+#-])',
@@ -44,21 +50,27 @@ export class UrlGeneratorComponent {
     Validators.pattern(URL_REGEX),
   ]);
 
-  protected createdUrl?: UrlItem;
+  protected createdUrl: UrlItem | null = null;
 
   constructor(
     private _urlService: UrlService,
     private _snackBar: MatSnackBar,
     private _infoDialog: InfoDialogService,
     private _router: Router,
+    private _domSanitizer: DomSanitizer,
   ) {}
 
   protected onCreate() {
-    if (this.urlFormControl.value && this.urlFormControl.valid) {
+    const sanitizedFullUrl = this._domSanitizer.sanitize(
+      SecurityContext.URL,
+      this.urlFormControl.value,
+    );
+
+    if (this.urlFormControl.valid && sanitizedFullUrl) {
       const urlItem: UrlItem = {
-        fullUrl: this.urlFormControl.value!,
+        fullUrl: sanitizedFullUrl,
         id: crypto.randomUUID(),
-        shortUrl: `/sl/${this.generateRandomChars()}`,
+        shortUrl: `/sl/${this.generateShortLinkPath()}`,
       };
       this._urlService.createUrl(urlItem).subscribe({
         next: (resp) => this.handleCreateUrlResponse(resp, urlItem),
@@ -78,7 +90,7 @@ export class UrlGeneratorComponent {
   }
 
   protected onClose() {
-    this.createdUrl = undefined;
+    this.createdUrl = null;
   }
 
   private handleCreateUrlResponse(resp: HttpResponse<void>, urlItem: UrlItem) {
@@ -96,9 +108,8 @@ export class UrlGeneratorComponent {
     }
   }
 
-  private generateRandomChars() {
+  // Generates 4 random alphabetical characters
+  private generateShortLinkPath() {
     return Math.random().toString(36).slice(2, 6);
   }
-
-  protected readonly Boolean = Boolean;
 }
