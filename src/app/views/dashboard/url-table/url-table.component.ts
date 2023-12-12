@@ -1,6 +1,10 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { MatTableDataSource, MatTableModule } from '@angular/material/table';
+import {
+  MatTable,
+  MatTableDataSource,
+  MatTableModule,
+} from '@angular/material/table';
 import { UrlItem } from '../../../shared/models/url-item';
 import { UrlService } from '../../../core/services/url/url.service';
 import { HttpResponse, HttpStatusCode } from '@angular/common/http';
@@ -33,10 +37,11 @@ export class UrlTableComponent implements OnInit {
   public set url(url: UrlItem | null) {
     if (url) {
       this.tableDataSource.data.push(url);
-      // eslint-disable-next-line no-self-assign
-      this.tableDataSource.data = this.tableDataSource.data;
+      this.table.renderRows();
     }
   }
+
+  @ViewChild(MatTable) table!: MatTable<UrlItem>;
 
   protected tableDataSource: MatTableDataSource<UrlItem> =
     new MatTableDataSource<UrlItem>();
@@ -93,9 +98,9 @@ export class UrlTableComponent implements OnInit {
     }
   }
 
-  private handleGetAllUrlsResponse(resp: HttpResponse<object>) {
-    if (resp.ok) {
-      this.tableDataSource.data = resp.body as UrlItem[];
+  private handleGetAllUrlsResponse(resp: HttpResponse<UrlItem[]>) {
+    if (resp.ok && resp.body) {
+      this.tableDataSource.data = resp.body;
     } else if (resp.status === HttpStatusCode.Unauthorized) {
       this._infoDialog.open(UNAUTHORIZED_DIALOG_DATA);
     } else {
