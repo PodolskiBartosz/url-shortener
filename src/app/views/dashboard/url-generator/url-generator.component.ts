@@ -19,6 +19,7 @@ import { InfoDialogService } from '../../../core/components/info-dialog/info-dia
 import { UNAUTHORIZED_DIALOG_DATA } from '../../../core/components/info-dialog/info-dialog-data';
 import { Router } from '@angular/router';
 import { DomSanitizer } from '@angular/platform-browser';
+import { IdGeneratorService } from '../../../core/services/id-generator/id-generator.service';
 
 const URL_REGEX = new RegExp(
   '(http|ftp|https):\\/\\/([\\w_-]+(?:(?:\\.[\\w_-]+)+))([\\w.,@?^=%&:\\/~+#-]*[\\w@?^=%&\\/~+#-])',
@@ -26,6 +27,8 @@ const URL_REGEX = new RegExp(
 
 const SNACKBAR_INVALID_URL = 'The url is invalid.';
 const SNACKBAR_TEXT_COPIED = 'The text has been copied to clipboard.';
+
+const SHORT_URL_PATH_LENGTH = 6;
 
 @Component({
   selector: 'app-url-generator',
@@ -57,6 +60,7 @@ export class UrlGeneratorComponent {
     private _snackBar: MatSnackBar,
     private _infoDialog: InfoDialogService,
     private _router: Router,
+    private _idGenerator: IdGeneratorService,
     private _domSanitizer: DomSanitizer,
   ) {}
 
@@ -70,7 +74,7 @@ export class UrlGeneratorComponent {
       const urlItem: UrlItem = {
         fullUrl: sanitizedFullUrl,
         id: crypto.randomUUID(),
-        shortUrl: `/${this.generateShortLinkPath()}`,
+        shortUrl: `/${this._idGenerator.createUrlId(SHORT_URL_PATH_LENGTH)}`,
       };
       this._urlService.createUrl(urlItem).subscribe({
         next: (resp) => this.handleCreateUrlResponse(resp, urlItem),
@@ -106,10 +110,5 @@ export class UrlGeneratorComponent {
     } else {
       console.error(resp);
     }
-  }
-
-  // Generates 4 random alphanumerical characters
-  private generateShortLinkPath() {
-    return Math.random().toString(36).slice(2, 6);
   }
 }
