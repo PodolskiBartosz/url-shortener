@@ -70,7 +70,7 @@ export class UrlGeneratorComponent {
       const urlItem: UrlItem = {
         fullUrl: sanitizedFullUrl,
         id: crypto.randomUUID(),
-        shortUrl: `/sl/${this.generateShortLinkPath()}`,
+        shortUrl: `/${this.generateShortLinkPath()}`,
       };
       this._urlService.createUrl(urlItem).subscribe({
         next: (resp) => this.handleCreateUrlResponse(resp, urlItem),

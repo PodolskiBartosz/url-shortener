@@ -13,7 +13,7 @@ export const routes: Routes = [
       ),
     canActivate: [authenticationGuard],
   },
-  { path: 'sl/:id', component: LinkRedirectionComponent },
+  { path: ':id', component: LinkRedirectionComponent },
   { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
   { path: '**', redirectTo: 'dashboard' },
 ];

@@ -16,7 +16,7 @@ export class LinkRedirectionComponent {
   ) {
     // Redirect to full url using short url located in the path
     // Dirty implementation, as there are no fit endpoints for this functionality
-    const shortUrl = `/sl/${this._route.snapshot.paramMap.get('id')}`;
+    const shortUrl = `/${this._route.snapshot.paramMap.get('id')}`;
     const fullUrl = this._storageManager.getUrl(shortUrl);
     if (fullUrl) {
       this.document.location.href = fullUrl;
