@@ -11,7 +11,7 @@
         class="username"
         disableRipple="true"
         disabled
-        style="opacity: 1"
+        [style.opacity]="1"
         >{{ username ? username : "User" }}</span
       >
       <button mat-menu-item (click)="logOut()">
