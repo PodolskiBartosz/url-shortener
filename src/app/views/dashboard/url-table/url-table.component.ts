@@ -41,7 +41,7 @@ export class UrlTableComponent implements OnInit {
     }
   }
 
-  @ViewChild(MatTable) table!: MatTable<UrlItem>;
+  @ViewChild('urlTable') table!: MatTable<UrlItem>;
 
   protected tableDataSource: MatTableDataSource<UrlItem> =
     new MatTableDataSource<UrlItem>();
