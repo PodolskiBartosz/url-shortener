@@ -15,7 +15,7 @@
           [type]="hidePassword ? 'password' : 'text'"
           [formControl]="passwordControl"
         />
-        <button mat-icon-button matSuffix (click)="togglePassword()">
+        <button mat-icon-button matSuffix type="button" (click)="togglePassword()">
           <mat-icon>{{
             hidePassword ? "visibility_off" : "visibility"
           }}</mat-icon>
